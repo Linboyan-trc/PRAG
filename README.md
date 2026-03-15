@@ -42,9 +42,17 @@ Parametric RAG introduces a new paradigm for retrieval-augmented generation by e
 
 In the following GitHub repository, we demonstrate how to test the performance of Parametric RAG on various QA datasets. Specifically, follow these steps to run Parametric RAG:
 
-- **Run the Data Augmentation Module**: This step corresponds to Section 3.2.1 *Self-Augmentation* in the original paper, where documents are transformed into a data-augmented dataset.
-- **Generate Parametric Representations of Documents**: This step corresponds to Section 3.2.2 *Additional Parameter Training* in the original paper, where additional LoRA parameters are trained.
-- **Inference**: Merge the parametric representations of relevant documents, insert them into the LLM, and use the updated LLM for inference.
+- **Run the Data Augmentation Module**: 
+This step corresponds to Section 3.2.1 *Self-Augmentation* in the original paper, 
+where documents are transformed into a data-augmented dataset.
+
+- **Generate Parametric Representations of Documents**: 
+This step corresponds to Section 3.2.2 *Additional Parameter Training* in the original paper, 
+where additional LoRA parameters are trained.
+
+- **Inference**: 
+Merge the parametric representations of relevant documents, 
+insert them into the LLM, and use the updated LLM for inference.
 
 All the prompts used in the experiment are displayed in the `all_prompt.md` file.
 
@@ -61,7 +69,8 @@ Please change the `ROOT_DIR` variable in `src/root_dir_path.py` to the folder ad
 
 ### Self-Augmentation
 
-You can directly use the pre-augmented data file `data_aug.tar.gz`. To extract it, run the command `tar -xzvf data_aug.tar.gz` in your terminal.
+You can directly use the pre-augmented data file `data_aug.tar.gz`. 
+To extract it, run the command `tar -xzvf data_aug.tar.gz` in your terminal.
 
 If you want to perform data augmentation yourself, please process it as follows.
 
