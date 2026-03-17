@@ -1,25 +1,42 @@
+# 1. 系统
+# 2. 垃圾回收
+# 3. 时间
 import os
 import gc
 import time
+
+# 4. 参数解析
+# 5. prompt模版
+# 6. 进度显示
+# 7. 随机库
+# 8. numpy数组
+# 9. 基本类型
 import argparse
-import torch
+import prompt_template
 from tqdm import tqdm
-from peft import TaskType, get_peft_model, LoraConfig, PeftModel
-from torch.utils.data import Dataset
-from transformers import DefaultDataCollator
+import random
+import numpy as np
 from typing import Dict, List
 
-import prompt_template
+# 10. torch
+# 11. torch中数据集类
+# 12. transformers中数据集排序器
+# 13. peft参数微调相关的库
+import torch
+from torch.utils.data import Dataset
+from transformers import DefaultDataCollator
+from peft import TaskType, get_peft_model, LoraConfig, PeftModel
+
+# 14. 项目路径
+# 15. 自定义工具，获取模型，加载数据
 from root_dir_path import ROOT_DIR
 from utils import get_model, load_data
 
-import numpy as np
-import random
-
+# 1. 设置随机数
 seed = 42 
-torch.manual_seed(seed)
-np.random.seed(seed)
 random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
 
 
 class TrainingData(Dataset):
@@ -121,9 +138,14 @@ def train(question, augments, args, model, tokenizer,
     return model
 
 
+# 1. 文档参数化
 def main(args):
+    # 1.1 加载Data Augmentation数据
     data_list = load_data(args.dataset, args.data_type, args.augment_model)
+    
+    # 1.2 获取模型，tokenizer，推理配置
     model, tokenizer, _generation_config = get_model(args.model_name)
+    
     if args.with_cot:
         prompt_template.get_fewshot(args.dataset)
 
