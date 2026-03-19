@@ -168,7 +168,9 @@ At this point, the input parameter `dataset` refers to the name of the dataset y
 
 ![Methodology](assets/method.png)
 
-By calling the `src/encode.py` file, you will generate a parameterized representation of the documents (LoRA) for the given dataset. The parameters for this file are as follows:
+By calling the `src/encode.py` file, 
+you will generate a parameterized representation of the documents (LoRA) for the given dataset. 
+The parameters for this file are as follows:
 
 | **Parameter**                  | **Example/Options**                                  |
 | ------------------------------ | ---------------------------------------------------- |
@@ -181,7 +183,8 @@ By calling the `src/encode.py` file, you will generate a parameterized represent
 | `per_device_train_batch_size`, `num_train_epochs`, `learning_rate` | Training parameters |
 | `lora_rank`, `lora_alpha`       | LoRA parameters, dropout will be set to 0 |
 
-When running for the first time with a specific LoRA parameter, an initial random parameter, `base_weight` will be created. All subsequent training will start from this base_weight.
+When running for the first time with a specific LoRA parameter, an initial random parameter, `base_weight` will be created. 
+All subsequent training will start from this base_weight.
 
 All generated parameters are stored in the `offline` folder. 
 The specific location of the parameter files is as follows:

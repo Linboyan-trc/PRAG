@@ -26,19 +26,8 @@ from root_dir_path import ROOT_DIR
 DATA_ROOT_DIR = os.path.join(ROOT_DIR, "data_aug")
 
 
-# 2. 获取模型HuggingFace仓库名
-def get_model_path(model_name):
-    if model_name == "llama3-8b-instruct": 
-        return "meta-llama/Meta-Llama-3-8B-Instruct"
-    elif model_name == "qwen2.5-1.5b-instruct":
-        return "Qwen/Qwen2.5-1.5B-Instruct"
-    elif model_name == "llama3.2-1b-instruct":
-        return "meta-llama/Llama-3.2-1B-Instruct"
-    else:
-        return model_name
-
-
 # 1. 获取模型
+# 1.1 根据model_name，返回model, tokenizer, 推理配置
 def get_model(model_name, max_new_tokens=20):
     # 1. 获取模型
     # 1.1 根据model_name，获取模型HuggingFace仓库名
@@ -64,10 +53,24 @@ def get_model(model_name, max_new_tokens=20):
     # 3.1 返回模型，tokenizer，推理配置
     return model, tokenizer, generation_config
 
-####################################################################################################
-# 1. 加载数据
+
+# 1.2 获取模型HuggingFace仓库名
+def get_model_path(model_name):
+    if model_name == "llama3-8b-instruct": 
+        return "meta-llama/Meta-Llama-3-8B-Instruct"
+    elif model_name == "qwen2.5-1.5b-instruct":
+        return "Qwen/Qwen2.5-1.5B-Instruct"
+    elif model_name == "llama3.2-1b-instruct":
+        return "meta-llama/Llama-3.2-1B-Instruct"
+    else:
+        return model_name
+
+# 2. 加载数据
+# 2.1 根据数据集名称，进行数据增强时用的模型名称，返回该数据集在该模型下增强后的数据集
+# 2.2 如果指定了具体的问题类型，就只返回增前后的该类型的问题
 def load_data(data_name, data_type, model_name):
     # 1.1 获取数据集下json文件
+    # 1.1.1 比如/PRAG/data_aug/2wikimultihopqa/llama3-8b-instruct/，有具体的5个.json文件，bridge_comparison.son, comparison.json, compositional.json, inference.json, total.json
     # 1.1.1 比如/PRAG/data_aug/<data_name>/<model_name>/，有具体的5个.json文件
     # 1.1.2 然后获取这5个json文件
     input_dir = os.path.join(DATA_ROOT_DIR, data_name, model_name)
@@ -120,6 +123,7 @@ def load_data(data_name, data_type, model_name):
         return solve_dataset
  
 
+####################################################################################################
 class BaseDataset:
     @classmethod
     def normalize_answer(cls, s):
