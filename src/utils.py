@@ -34,7 +34,7 @@ def get_model(model_name, max_new_tokens=20):
     # 1.2 下载模型
     # 1.3 获取tokenizer
     model_path = get_model_path(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.float32, low_cpu_mem_usage=True, device_map="auto", trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.float32, low_cpu_mem_usage=False, device_map=None, trust_remote_code=True)
     tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
     
     # 2. 设置推理配置
